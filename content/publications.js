@@ -1,10 +1,9 @@
 // 在此处添加论文
 const publications = [
     {
-      // paper: "ParallelSFL: A Novel Split Federated Learning Framework Tackling Heterogeneity Issues",
-      // authors: "Yunming Liao, Yang Xu, Hongli Xu, Zhiwai Yao, Liusheng Huang, Chunming Qiao",
+      paper: "Accelerating End-Cloud Collaborative Inference via Near Bubble-free Pipeline Optimization",
+      authors: "Luyao Gao, Jianchun Liu, Hongli Xu, Sun Xu, Qianpiao Ma, Liusheng Huang",
       // publisher: "The 30th Annual International Conference On Mobile Computing And Networking (MOBICOM 2024)",
-      // level: `[MOBICOM'24, CCF A]`,
-      paper: "To be continue~",
+      level: `[INFOCOM'25, CCF A]`,
     },
   ];

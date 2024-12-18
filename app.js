@@ -1,11 +1,159 @@
+let curlang = "en";
+let repaint = document.body.clientWidth <= 728 ? false : true;
+
 document.addEventListener("DOMContentLoaded", function () {
+  console.log(curlang);
+  if (curlang == "en") {
+    loadEN();
+  } else if (curlang == "zh") {
+    loadZH();
+  }
+  document
+    .getElementById("languageToggle")
+    .addEventListener("click", function () {
+      const toggle = document.querySelector(".language-toggle");
+      if (toggle.classList.contains("zh-active")) {
+        toggle.classList.remove("zh-active");
+        toggle.classList.add("en-active");
+        curlang = "en";
+        loadEN();
+        translateTitle("en");
+      } else {
+        toggle.classList.remove("en-active");
+        toggle.classList.add("zh-active");
+        curlang = "zh";
+        loadZH();
+        translateTitle("zh");
+      }
+    });
+});
+function loadZH() {
+  // loadNavAuto("zh");
+  loadProfile(about_zh);
+  loadAwards(document.body.clientWidth <= 728 ? false : true, awards_zh);
+  const publications_content = document.getElementById("publicationsContent");
+  publications_content.innerHTML = "";
+
+  const strongName = "Yunming Liao";
+  for (let pub of publications_zh) {
+    publications_content.appendChild(
+      createItemOfPublications(
+        pub["paper"],
+        pub["authors"],
+        pub["publisher"],
+        pub["level"],
+        strongName
+      )
+    );
+  }
+
+  const projects_content = document.getElementById("projectsContent");
+  projects_content.innerHTML = "";
+
+  for (let proj of projects_zh) {
+    projects_content.appendChild(createItemOfProjects(proj, "zh"));
+  }
+
+  const services_content = document.getElementById("servicesContent");
+  services_content.innerHTML = "";
+  for (let service of services_zh) {
+    services_content.appendChild(createItemofService(service));
+  }
+}
+
+function loadEN() {
+  // loadNavAuto("en");
+  loadProfile(about);
+  loadAwards(document.body.clientWidth <= 728 ? false : true, awards);
+  const publications_content = document.getElementById("publicationsContent");
+  publications_content.innerHTML = "";
+  const strongName = "Yunming Liao";
+  for (let pub of publications) {
+    publications_content.appendChild(
+      createItemOfPublications(
+        pub["paper"],
+        pub["authors"],
+        pub["publisher"],
+        pub["level"],
+        strongName
+      )
+    );
+  }
+
+  const projects_content = document.getElementById("projectsContent");
+  projects_content.innerHTML = "";
+  for (let proj of projects) {
+    projects_content.appendChild(createItemOfProjects(proj, "en"));
+  }
+
+  const services_content = document.getElementById("servicesContent");
+  services_content.innerHTML = "";
+  for (let service of services) {
+    services_content.appendChild(createItemofService(service));
+  }
+}
+
+function loadAwards(opt, awards) {
+  console.log(opt);
+
+  const awards_content = document.getElementById("awardsContent");
+  awards_content.innerHTML = "";
+  // True:正常
+  if (opt) {
+    for (let award of awards) {
+      for (const [key, value] of Object.entries(award)) {
+        awards_content.appendChild(createItemOfAwards(key, value));
+      }
+    }
+  }
+  // False: 手机版
+  else {
+    for (let award of awards) {
+      for (const [key, value] of Object.entries(award)) {
+        awards_content.appendChild(createItemOfAwardsMobile(key, value));
+      }
+    }
+  }
+}
+
+const translateTitle = (target) => {
+  const h2Elements = document.querySelectorAll("h2");
+  let title = target == "zh" ? title_zh : title_en;
+  h2Elements.forEach((h2) => {
+    h2.innerHTML = h2.innerHTML.replace(
+      h2.textContent,
+      ` ${title[h2.textContent.trim()]}`
+    );
+  });
+};
+
+const loadNavAuto = (lang) => {
+  const sections = document.querySelectorAll("section");
+  const nav = document.getElementById("nav");
+  nav.innerHTML = "";
+  if (lang == "zh") {
+    sections.forEach((section) => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = `#${section.id}`;
+      a.textContent = `${nav_zh[section.id]}`;
+      li.appendChild(a);
+      nav.appendChild(li);
+    });
+  } else {
+    sections.forEach((section) => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = `#${section.id}`;
+      a.textContent = `${section.id[0].toUpperCase()}${section.id.slice(1)}`;
+      li.appendChild(a);
+      nav.appendChild(li);
+    });
+  }
   const navLinks = document.querySelectorAll(".nav-list a");
-  const sections = document.querySelectorAll(".section");
 
-  // 确保每次点击时只有一个链接是 active
-  let currentActiveIndex = -1; // 当前激活的索引
+  let currentActiveIndex = -1;
 
-  // 平滑滚动到目标区域并更新 active
   navLinks.forEach((link) => {
     link.addEventListener("click", (e) => {
       e.preventDefault(); // 阻止默认跳转行为
@@ -40,52 +188,44 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      const navList = document.querySelector(".nav-list");
+      navList.classList.remove("open"); // 关闭菜单
+    });
+  });
+};
+
+const loadProfile = (info) => {
+  document.getElementById("profileName").innerHTML = info["my_name"];
+  document.getElementById("profilePosition").innerHTML = info["position"];
+  const profile_company = document.getElementById("profileCompany");
+  profile_company.innerHTML = "";
+  for (let item of info["company"]) {
+    const p = document.createElement("p");
+    const a = document.createElement("a");
+    a.className = "about-link";
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.link = item["link"];
+    a.innerText = item["name"];
+    p.appendChild(a);
+    profile_company.appendChild(p);
+  }
   document.getElementById("researchContent").innerText =
-    introduction["research_content"];
-  document.getElementById("introduction").innerText =
-    introduction["introduction"];
-  document.getElementById("email").innerText = `Email:${introduction["email"]}`;
-  document.getElementById("google").href = introduction["google_scholar"];
-  document.getElementById("github").href = introduction["github"];
-  document.getElementById("emailLink").href = `mailto:${introduction["email"]}`;
-
-  const awards_content = document.getElementById("awardsContent");
-  for (let award of awards) {
-    for (const [key, value] of Object.entries(award)) {
-      awards_content.appendChild(createItemOfAwards(key, value));
-    }
-  }
-
-  const publications_content = document.getElementById("publicationsContent");
-  const strongName = "Yunming Liao";
-  for (let pub of publications) {
-    publications_content.appendChild(
-      createItemOfPublications(
-        pub["paper"],
-        pub["authors"],
-        pub["publisher"],
-        pub["level"],
-        strongName
-      )
-    );
-  }
-
-  const projects_content = document.getElementById("projectsContent");
-  for (let proj of projects) {
-    projects_content.appendChild(createItemOfProjects(proj));
-  }
-
-  const services_content = document.getElementById("servicesContent");
-  for (let service of services) {
-    services_content.appendChild(createItemofService(service));
-  }
-});
+    info["research_content"];
+  document.getElementById("introduction").innerText = info["introduction"];
+  document.getElementById("email").innerText = `${info["email"]}`;
+  document.getElementById("google").href = info["google_scholar"];
+  document.getElementById("github").href = info["github"];
+  document.getElementById("emailLink").href = `mailto:${info["email"]}`;
+};
 
 function createItemOfAwards(time, text) {
   // 创建外层容器div
   const containerDiv = document.createElement("div");
   containerDiv.style.display = "flex"; // 使用Flexbox布局
-  containerDiv.style.alignItems = "center"; // 垂直居中
+  // containerDiv.style.alignItems = "center"; // 垂直居中
   containerDiv.style.marginBottom = "10px"; // 每个项之间的间距
 
   // 创建li
@@ -100,16 +240,59 @@ function createItemOfAwards(time, text) {
   // 创建时间部分
   const timeSpan = document.createElement("span");
   timeSpan.className = "card-time";
-  timeSpan.innerText = time;
-
+  timeSpan.innerText = `${time}`;
+  let textSpan;
   // 创建奖项内容部分
-  const textSpan = document.createElement("span");
-  textSpan.style.color = "black";
-  textSpan.textContent = text;
-
+  if (curlang == "zh") {
+    textSpan = highlightBoldWords(text, awards_strong);
+  } else {
+    textSpan = document.createElement("span");
+    textSpan.style.color = "black";
+    textSpan.textContent = text;
+  }
   // 将时间和奖项内容添加到内容容器
   contentDiv.appendChild(textSpan);
   contentDiv.appendChild(timeSpan);
+
+  // 将圆点和内容容器添加到外层容器
+  containerDiv.appendChild(dot);
+  containerDiv.appendChild(contentDiv);
+
+  return containerDiv;
+}
+
+function createItemOfAwardsMobile(time, text) {
+  // 创建外层容器div
+  const containerDiv = document.createElement("div");
+  containerDiv.style.display = "flex"; // 使用Flexbox布局
+  // containerDiv.style.alignItems = "center"; // 垂直居中
+  containerDiv.style.marginBottom = "10px"; // 每个项之间的间距
+
+  // 创建li
+  const dot = document.createElement("li");
+
+  // 创建内容部分的容器div
+  const contentDiv = document.createElement("div");
+  contentDiv.style.width = "100%"; // 保证内容区域宽度充满父容器
+
+  // 创建时间部分
+  const timeSpan = document.createElement("span");
+  timeSpan.className = "card-time";
+  timeSpan.innerText = `[${time}]`;
+
+  // 创建奖项内容部分
+  let textSpan;
+  if (curlang == "zh") {
+    textSpan = highlightBoldWords(text, awards_strong);
+  } else {
+    textSpan = document.createElement("span");
+    textSpan.style.color = "black";
+    textSpan.textContent = text;
+  }
+
+  // 将时间和奖项内容添加到内容容器
+  contentDiv.appendChild(timeSpan);
+  contentDiv.appendChild(textSpan);
 
   // 将圆点和内容容器添加到外层容器
   containerDiv.appendChild(dot);
@@ -168,29 +351,42 @@ function createItemOfPublications(
   return div;
 }
 
-function createItemOfProjects(proj) {
+function createItemOfProjects(proj, lang) {
   const containerDiv = document.createElement("div");
   containerDiv.style.display = "flex"; // 使用Flexbox布局
   containerDiv.style.marginBottom = "10px"; // 每个项之间的间距
   const li = document.createElement("li");
   const div = document.createElement("div");
-  const first_div = document.createElement('div')
+  const first_div = document.createElement("div");
   const name = document.createElement("span");
-  name.innerText = proj["name"];
-  name.style.color = "black";
+  // name.style.color = "black";
   const funding = document.createElement("span");
-  funding.innerText = `[${proj["funding"]}]`;
   funding.style.marginRight = "10px";
-  funding.className = "card-time";
+  // funding.className = "card-time";
   const type = document.createElement("span");
-  type.innerText = `Type:${proj["type"]}`;
   type.style.marginRight = "10px";
   const time = document.createElement("span");
-  time.innerText = `Period:${proj["time"]}`;
+  if (lang == "zh") {
+    name.innerText = `项目名称：${proj["name"]}`;
+    funding.innerText = `资助类别：${proj["funding"]}`;
+    funding.style.display = "block";
+    type.innerText = `${"资助金额"}：${proj["type"]}，${"资助年限"}：${
+      proj["time"]
+    }`;
+    first_div.appendChild(name);
+    first_div.appendChild(funding);
+    // time.innerText = `${"资助年限"}:${proj["time"]}`;
+  } else {
+    name.innerText = proj["name"];
+    funding.innerText = `[${proj["funding"]}]`;
+    funding.className = "card-time";
+    type.innerText = `${"Type"}:${proj["type"]}`;
+    time.innerText = `${"Period"}:${proj["time"]}`;
+    first_div.appendChild(funding);
+    first_div.appendChild(name);
+  }
   time.style.marginRight = "10px";
-  first_div.appendChild(funding)
-  first_div.appendChild(name);
-  div.appendChild(first_div)
+  div.appendChild(first_div);
   div.appendChild(type);
   div.appendChild(time);
   containerDiv.appendChild(li);
@@ -205,28 +401,50 @@ function createItemofService(service) {
   const div = document.createElement("div");
   const type = document.createElement("span");
   type.innerText = `[${service["type"]}]`;
-  type.className = 'card-time'
+  type.className = "card-time";
   const content = document.createElement("span");
-  content.innerText = `${service['name']}`
-  div.appendChild(type)
-  div.appendChild(content)
+  content.innerText = `${service["name"]}`;
+  div.appendChild(type);
+  div.appendChild(content);
   containerDiv.appendChild(li);
   containerDiv.appendChild(div);
   return containerDiv;
 }
+
 // 切换菜单展开与关闭
 function toggleMenu() {
   const navList = document.querySelector(".nav-list");
   navList.classList.toggle("open");
 }
 
-// 自动关闭菜单
-const navLinks = document.querySelectorAll(".nav-list a");
+function handleResize() {
+  const viewportWidth = document.body.clientWidth;
+  if (viewportWidth < 728 && !repaint) {
+    loadAwards(false, curlang == "zh" ? awards_zh : awards);
+    repaint = true;
+  } else if (viewportWidth >= 728 && repaint) {
+    loadAwards(true, curlang == "zh" ? awards_zh : awards);
+    repaint = false;
+  }
+}
 
-// 监听每个导航链接的点击事件，点击后关闭菜单
-navLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    const navList = document.querySelector(".nav-list");
-    navList.classList.remove("open"); // 关闭菜单
+window.addEventListener("resize", handleResize);
+
+function highlightBoldWords(text, boldWords) {
+  // 创建一个 span 元素来包裹最终的文本
+  const textSpan = document.createElement("span");
+  textSpan.style.color = "black"; // 设置文本颜色（可选）
+
+  // 遍历 boldWords 数组，将匹配的词用 <strong> 标签包裹
+  boldWords.forEach((word) => {
+    // 使用正则表达式全局匹配指定的词（防止重复匹配）
+    const regex = new RegExp(word, "g"); // 'g' 表示全局匹配
+    text = text.replace(regex, `<strong>${word}</strong>`);
   });
-});
+
+  // 设置带有加粗文本的 innerHTML
+  textSpan.innerHTML = text;
+
+  // 返回包含加粗文本的元素
+  return textSpan;
+}

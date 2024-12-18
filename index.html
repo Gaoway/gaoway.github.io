@@ -8,7 +8,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <!-- 导航栏 -->
@@ -21,73 +20,82 @@
             class="school-logo"
           />
         </div>
-        <div class="navbar-toggle" onclick="toggleMenu()">&#9776;</div>
-        <!-- 汉堡菜单按钮 -->
-        <div class="navbar-right">
-          <nav>
-            <ul class="nav-list">
-              <li><a href="#about" onclick="setActive(this)">About</a></li>
-              <li><a href="#awards" onclick="setActive(this)">Awards</a></li>
-              <li>
-                <a href="#publications" onclick="setActive(this)"
-                  >Publications</a
-                >
-              </li>
-            </ul>
-          </nav>
+        <div class="navbar-center">
+          <div id="languageToggle" class="language-toggle">
+            <span class="lang-text" id="langZh">中</span>/<span
+              class="lang-text"
+              id="langEn"
+              >EN</span
+            >
+          </div>
         </div>
+        <!-- <div class="navbar-right">
+          <div class="navbar-toggle" onclick="toggleMenu()">&#9776;</div>
+          <nav>
+            <ul id="nav" class="nav-list"></ul>
+          </nav>
+        </div> -->
       </div>
     </header>
 
     <!-- 主内容 -->
     <main>
-      <!-- About Me -->
       <section style="margin-top: 80px" id="about" class="section about">
+        <div class="sec-title container" style="display: none">
+          <h2><i class="fas fa-address-card"></i> About</h2>
+        </div>
         <div class="container about-container card">
-          <div class="about-left">
-            <img src="./img/me.png" alt="Your Photo" class="profile-picture" />
+          <div class="about-top">
+            <div class="about-top-left">
+              <img
+                src="./img/me.png"
+                alt="Your Photo"
+                class="profile-picture"
+              />
+            </div>
+            <div id="profile" class="about-top-right">
+              <span id="profileName">Luyao Gao</span><br />
+              <span id="profilePosition">Ph.D Candidate</span>
+              <div id="profileCompany">
+                <p>
+                  <a
+                    class="about-link"
+                    href="https://cs.ustc.edu.cn/main.htm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >School of Computer Science and Technology</a
+                  >
+                </p>
+                <p>
+                  <a
+                    class="about-link"
+                    href="https://www.ustc.edu.cn/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >University of Science and Technology of China (USTC)</a
+                  >
+                </p>
+                <p>
+                  <a
+                    class="about-link"
+                    href="https://int-ustc.github.io/index.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >USTC Intelligent Network and System Group (USTC-INT)</a
+                  >
+                </p>
+              </div>
+              <p id="email"></p>
+              <p id="researchContent">
+                Research Interests: Edge Intelligence, Federated Learning, Split
+                Federated Learning
+              </p>
+            </div>
           </div>
-          <div class="about-right">
-            <span>Luyao Gao</span><br />
-            <span>PhD student</span>
-            <p>
-              <a
-                class="about-link"
-                href="https://cs.ustc.edu.cn/main.htm"
-                target="_blank"
-                rel="noopener noreferrer"
-                >School of Computer Science and Technology</a
-              >
-            </p>
-            <p>
-              <a
-                class="about-link"
-                href="https://www.ustc.edu.cn/"
-                target="_blank"
-                rel="noopener noreferrer"
-                >University of Science and Technology of China (USTC)</a
-              >
-            </p>
-            <p>
-              <a
-                class="about-link"
-                href="https://int-ustc.github.io/index.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                >USTC Intelligent Network and System Group (USTC-INT)</a
-              >
-            </p>
-            <p id="email"></p>
-            <p id="researchContent">
-              Research Interests: Edge Intelligence, Federated Learning, Split
-              Federated Learning
-            </p>
+          <div class="about-bottom">
             <p id="introduction">
-              I'm received B.S. degree in 2020 from the University of Science
-              and Technology of China. He is currently pursuing his Ph.D. degree
-              in the School of Computer Science and Technology, University of
-              Science and Technology of China. His research interests include
-              mobile edge computing and federated learning.
+              I'm received B.S. degree in 2022 from the University of Science
+              and Technology of China. 
             </p>
             <div class="social-links">
               <a id="emailLink" href="#" title="Email"
@@ -96,7 +104,9 @@
               <a id="google" href="" title="Google Scholar"
                 ><i class="fab fa-google"></i
               ></a>
-              <a id="github" href="#" title="Github"><i class="fab fa-github"></i></a>
+              <a id="github" href="#" title="Github"
+                ><i class="fab fa-github"></i
+              ></a>
             </div>
           </div>
         </div>
@@ -104,51 +114,32 @@
 
       <!-- Awards -->
       <section id="awards" class="section awards">
-        <h2><i class="fas fa-trophy"></i> Awards</h2>
-        <div id="awardsContent" class="container grid card">
-          <!-- <div class="card">
-            <div class="card-time"></div>
-            <p style="color: black">
-              <li>2024 Jiaolong First-Class Scholarship</li> 
-            </p>
-          </div> -->
+        <div class="sec-title container">
+          <h2><i class="fas fa-trophy"></i> Awards</h2>
         </div>
+        <div id="awardsContent" class="container grid card"></div>
       </section>
 
       <!-- Publications -->
       <section id="publications" class="section publications">
-        <h2><i class="fas fa-book"></i> Publications</h2>
-        <!-- <h3>Conference Papers</h3> -->
-        <div id="publicationsContent" class="container grid card">
-          <!-- <div class="card">
-            <div class="card-time">[ACM Mobicom'24]</div>
-            <h3>
-              ParallelSFL: A Novel Split Federated Learning Framework Tackling
-              Heterogeneity Issues
-            </h3>
-            <p>
-              <strong style="color: black">Luyao Gao</strong>, *Yang Xu,
-              *Hongli Xu, Zhiwei Yao, Liusheng Huang, Chunming Qiao.
-            </p>
-            <p style="color: #2a9df4">
-              <i>
-                The 30th Annual International Conference On Mobile Computing And
-                Networking (MobiCom), 2024</i
-              >
-            </p>
-          </div> -->
-
+        <div class="sec-title container">
+          <h2><i class="fas fa-book"></i> Publications</h2>
         </div>
+        <div id="publicationsContent" class="container grid card"></div>
       </section>
       <!-- Projects -->
       <section id="projects" class="section projects">
-        <h2><i class="fas fa-flask"></i> Projects</h2>
-        <div id="projectsContent" class="container grid card">
+        <div class="sec-title container">
+          <h2><i class="fas fa-flask"></i> Projects</h2>
+        </div>
+        <div id="projectsContent" class="container grid card"></div>
       </section>
       <!-- Services -->
       <section id="services" class="section services">
-        <h2><i class="fas fa-file-alt"></i> Academic Services</h2>
-        <div id="servicesContent" class="container grid card">
+        <div class="sec-title container">
+          <h2><i class="fas fa-file-alt"></i> Academic Services</h2>
+        </div>
+        <div id="servicesContent" class="container grid card"></div>
       </section>
     </main>
 
@@ -156,11 +147,10 @@
     <footer>
       <p>&copy; 2024 Luyao Gao - All Rights Reserved.</p>
     </footer>
-    <script type="text/javascript" src="./content/introduction.js"></script>
-    <script type="text/javascript" src="./content/awards.js"></script>
-    <script type="text/javascript" src="./content/publications.js"></script>
-    <script type="text/javascript" src="./content/projects.js"></script>
-    <script type="text/javascript" src="./content/services.js"></script>
+    <script type="text/javascript" src="./content/en.js"></script>
+    <script type="text/javascript" src="./content/zh.js"></script>
     <script type="text/javascript" src="app.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="translateBtn.css" />
   </body>
 </html>

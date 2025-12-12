@@ -19,7 +19,7 @@ const about_zh = {
   research_content: "研究方向:协作推理、大模型推理服务、边缘智能、边缘计算",
   introduction:
     "高路尧，现为中国科学技术大学计算机科学与技术学院博士研究生。他于2022年6月获得中国科学技术大学计算机科学与技术学院工学学士学位，并获得保送资格直接攻读博士学位。他的研究兴趣集中于协作推理、大模型推理服务、边缘智能与边缘计算等前沿领域，致力于探索高效、可靠、可扩展的智能计算范式。目前，他已发表多篇高水平学术论文，并连续两年以第一作者身份在网络通信领域顶级会议IEEE INFOCOM上发表研究成果。此外，他还曾赴英国、日本等地进行学术交流与访问，积极参与国际合作与研讨。",
-  email: "邮箱:luyg@o@mail.ustc.edu.cn",
+  email: "邮箱:g@oway@mail.ustc.edu.cn",
   google_scholar:
     "https://github.com/gaoway",
   github: "https://github.com/gaoway",

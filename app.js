@@ -34,7 +34,7 @@ function loadZH() {
   const publications_content = document.getElementById("publicationsContent");
   publications_content.innerHTML = "";
 
-  const strongName = "Yunming Liao";
+  const strongName = "Luyao Gao";
   for (let pub of publications_zh) {
     publications_content.appendChild(
       createItemOfPublications(
@@ -67,7 +67,7 @@ function loadEN() {
   loadAwards(document.body.clientWidth <= 728 ? false : true, awards);
   const publications_content = document.getElementById("publicationsContent");
   publications_content.innerHTML = "";
-  const strongName = "Yunming Liao";
+  const strongName = "Luyao Gao";
   for (let pub of publications) {
     publications_content.appendChild(
       createItemOfPublications(

@@ -16,7 +16,7 @@ const about_zh = {
       link: "https://int-ustc.github.io/index.html",
     },
   ],
-  research_content: "研究方向:协作推理、边缘智能、大模型推理",
+  research_content: "研究方向:协作推理、大模型推理服务、边缘智能、边缘计算",
   introduction:
     "高路尧目前在中国科学技术大学计算机科学与技术学院攻读博士学位。2022年6月本科毕业于中国科学技术大学计算机科学专业并获得保研名额。",
   email: "邮箱:gaoway@mail.ustc.edu.cn",
@@ -26,9 +26,8 @@ const about_zh = {
 };
 const awards_zh = [
   // Year: Awards
-  { 2024: "中国科学技术大学硕士学业奖学金" },
-  { 2023: "中国科学技术大学硕士学业奖学金" },
-  { 2022: "中国科学技术大学硕士学业奖学金" },
+  { '2025': "苏州工业园区奖学金" }, 
+  { '2022-2025': "中国科学技术大学硕士学业奖学金" },
 ];
 const awards_strong = ['"蛟龙" 一等奖学金', "国家奖学金", "冠军"];
 
@@ -40,8 +39,17 @@ const publications_zh = [
     authors:
       "Luyao Gao, Jianchun Liu, Hongli Xu, Sun Xu, Qianpiao Ma, Liusheng Huang",
     publisher:
-      "2025-IEEE Conference on Computer Communications (INFOCOM 2024)",
+      "2025-IEEE Conference on Computer Communications (INFOCOM 2025)",
     level: `[INFOCOM'25, CCF A]`,
+  },
+  {
+    paper:
+      "CoSine: Enhancing LLM Serving via Collaborative and Decoupled Speculative Inference",
+    authors:
+      "Luyao Gao, Jianchun Liu, Xichong Zhang, Guoju Gao, Yunming Liao",
+    publisher:
+      "2026-IEEE Conference on Computer Communications (INFOCOM 2026)",
+    level: `[INFOCOM'26, CCF A]`,
   },
 ];
 

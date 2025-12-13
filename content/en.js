@@ -19,7 +19,7 @@ const about = {
     "Research Interests: Collaborative Inference, Edge Computing, LLM Service",
   introduction:
     "LLuyao Gao is currently a Ph.D. candidate in the School of Computer Science and Technology at the University of Science and Technology of China (USTC). He obtained his Bachelor of Engineering in Computer Science and Technology from USTC in June 2022 and was directly admitted to the Ph.D. program through a prestigious recommendation waiver. His research interests lie at the forefront of collaborative inference, large language model inference serving, edge intelligence, and edge computing. He is dedicated to exploring efficient, reliable, and scalable paradigms for intelligent computation. To date, he has published several high-quality academic papers and has, for two consecutive years, presented first-authored research at IEEE INFOCOM, a premier international conference in networking. Furthermore, he has actively engaged in international collaboration and scholarly exchange, having visited institutions and attended academic events in countries including the United Kingdom and Japan.",
-  email: "Email:luyg@o@mail.ustc.edu.cn",
+  email: "Email:gaoway [at] mail.ustc.edu.cn",
   google_scholar:
     "https://github.com/gaoway",
   github: "https://github.com/gaoway",
